@@ -1,0 +1,22 @@
+#version 330 core
+
+// HUD vertex shader. The HUD is drawn in pixels, so there is no MVP matrix here,
+// only the change from pixels to normalized device coordinates.
+
+// positions in pixels, with the origin at the top left corner of the window
+layout(location = 0) in vec2 vertexPosition_screenspace;
+layout(location = 1) in vec2 vertexUV;
+layout(location = 2) in vec4 vertexColor;
+
+out vec2 UV;
+out vec4 fragmentColor;
+
+uniform vec2 ScreenSize;
+
+void main(){
+	// from pixels to normalized device coordinates in [-1, 1], with y pointing up
+	vec2 ndc = vertexPosition_screenspace / ScreenSize * 2.0 - 1.0;
+	gl_Position = vec4(ndc.x, -ndc.y, 0.0, 1.0);
+	UV = vertexUV;
+	fragmentColor = vertexColor;
+}

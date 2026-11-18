@@ -1,0 +1,116 @@
+#version 330 core
+
+// Phong fragment shader. The colour of each pixel is computed with the Phong reflection
+// model (ambient, diffuse and specular) for a point light with attenuation. At night
+// there is also the landing light of the aircraft (a spot light) and a weak moonlight.
+// The terrain mixes two detail textures, and far away everything fades into the sky
+// colour (fog).
+
+// values interpolated from the vertex shader
+in vec3 fragmentColor;
+in vec2 UV;
+in vec3 Position_worldspace;
+in vec3 Normal_worldspace;
+
+// final colour of the pixel
+out vec4 color;
+
+// point light
+uniform vec3  LightPosition_worldspace;
+uniform vec3  LightColor;
+uniform vec3  LightAttenuation;     // constant, linear and quadratic terms
+
+// landing light of the aircraft (spot light) and moonlight (directional), used at night
+uniform vec3  SpotPosition_worldspace;
+uniform vec3  SpotDirection;
+uniform vec3  SpotColor;            // black when it is off
+uniform float SpotCosCutoff;
+uniform vec3  MoonDirection;        // direction towards the moon
+uniform vec3  MoonColor;            // black when it is off
+
+// camera
+uniform vec3  CameraPosition_worldspace;
+
+// material of the object being drawn
+uniform sampler2D TextureSampler;
+uniform int   UseTexture;           // 1 multiplies the colour by the texture (map_Kd), 2 is the terrain
+uniform sampler2D RockSampler;      // rock texture of the terrain, the grass is in TextureSampler
+uniform vec3  Tint;                 // multiplies the colour of the vertices
+uniform float Alpha;                // opacity of the material (d in the .mtl)
+uniform float AlphaCutoff;          // fragments more transparent than this are thrown away
+uniform float AmbientStrength;
+uniform float SpecularStrength;
+uniform float Shininess;
+uniform float Emissive;             // 1 for lights, which are not shaded
+uniform int   TwoSided;             // 1 lights both sides of the faces
+
+// fog
+uniform vec3  SkyColor;
+uniform float FogDensity;
+
+void main(){
+
+	vec4 base = vec4(fragmentColor * Tint, Alpha);
+	if (UseTexture == 1)
+		base *= texture(TextureSampler, UV);
+	if (UseTexture == 2) {
+		// The terrain repeats two detail textures, using the world position as texture
+		// coordinates. They are grey around 0.5 and multiply the colour of the vertices.
+		// Each one is used at two scales, so the repetition is not visible
+		vec3 P  = Position_worldspace;
+		vec3 Nt = normalize(Normal_worldspace);
+		vec3 grass = 0.6 * texture(TextureSampler, P.xz / 4.0).rgb
+		           + 0.4 * texture(TextureSampler, P.xz / 71.0 + 0.37).rgb;
+		// the rock is projected along the three axes and mixed by the normal (triplanar),
+		// so it does not stretch on the steep slopes
+		vec3 w = pow(abs(Nt), vec3(4.0));  w /= (w.x + w.y + w.z);
+		vec3 rock = w.x * texture(RockSampler, P.zy / 9.0).rgb
+		          + w.y * texture(RockSampler, P.xz / 9.0).rgb
+		          + w.z * texture(RockSampler, P.xy / 9.0).rgb;
+		rock = 0.65 * rock + 0.35 * texture(RockSampler, P.xz / 83.0 + 0.61).rgb;
+		// rock where the slope is steep or the vertex colour is grey (the peaks)
+		vec3 c = fragmentColor;
+		float grey = 1.0 - smoothstep(0.04, 0.14, max(c.r, max(c.g, c.b)) - min(c.r, min(c.g, c.b)));
+		float r = clamp(smoothstep(0.85, 0.65, Nt.y) + grey, 0.0, 1.0);
+		// times 2 keeps the brightness, and the contrast of the detail is raised a bit (1.6)
+		base.rgb *= max(1.0 + 3.2 * (mix(grass, rock, r) - 0.5), 0.0);
+	}
+	if (base.a < AlphaCutoff) discard;              // cut out textures, like the registration letters
+	vec3 baseColor = base.rgb;
+
+	// Phong reflection model, computed for each fragment (Phong shading)
+	vec3 N = normalize(Normal_worldspace);
+	vec3 V = normalize(CameraPosition_worldspace - Position_worldspace);
+	if (TwoSided == 1 && dot(N, V) < 0.0) N = -N;   // two sided lighting, the normal is turned towards the camera
+
+	vec3  toLight  = LightPosition_worldspace - Position_worldspace;
+	float d        = length(toLight);
+	vec3  L        = toLight / d;
+	vec3  R        = reflect(-L, N);
+	float att      = 1.0 / (LightAttenuation.x + LightAttenuation.y * d + LightAttenuation.z * d * d);
+
+	vec3 ambient  = AmbientStrength * baseColor;
+	vec3 diffuse  = max(dot(N, L), 0.0) * baseColor * LightColor;
+	vec3 specular = SpecularStrength * pow(max(dot(R, V), 0.0), Shininess) * LightColor;
+
+	vec3 lit = ambient + att * (diffuse + specular);
+
+	// the spot light uses the same model, limited to a cone with a soft edge
+	vec3  toSpot = SpotPosition_worldspace - Position_worldspace;
+	float ds     = length(toSpot);
+	vec3  Ls     = toSpot / ds;
+	float cone   = smoothstep(SpotCosCutoff, mix(SpotCosCutoff, 1.0, 0.35), dot(-Ls, SpotDirection));
+	float attS   = cone / (1.0 + 0.01 * ds + 0.00035 * ds * ds);
+	lit += attS * SpotColor * (max(dot(N, Ls), 0.0) * baseColor
+	                           + SpecularStrength * pow(max(dot(reflect(-Ls, N), V), 0.0), Shininess));
+
+	// the moonlight only has diffuse reflection
+	lit += max(dot(N, normalize(MoonDirection)), 0.0) * baseColor * MoonColor;
+	lit = mix(lit, baseColor, Emissive);             // lights are not shaded
+
+	// fog, the farther the fragment the closer its colour gets to the sky
+	float dist = length(CameraPosition_worldspace - Position_worldspace);
+	float fog  = exp(-pow(dist * FogDensity, 2.0));
+	fog = mix(fog, max(fog, 0.6), Emissive);         // lights cut through the fog a bit
+	color = vec4(mix(SkyColor, lit, clamp(fog, 0.0, 1.0)), base.a);
+}

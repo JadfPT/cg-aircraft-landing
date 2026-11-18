@@ -1,0 +1,5 @@
+# Air Traffic Control Tower by abass20 (Sketchfab, CC-BY-4.0)
+
+newmtl AirTower01MAT
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/tower_AirTower01MAT_baseColor.jpg

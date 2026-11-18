@@ -1,0 +1,169 @@
+# Piper PA-28 Cadet by Emmanuel Baranger (FlightGear, GPL)
+
+newmtl None
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_immat-white.png
+
+newmtl None_immat.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_immat.png
+
+newmtl transparentExt
+Kd 0.8000 0.8000 0.8000
+d 0.300
+
+newmtl DefaultWhite
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_texture.jpg
+
+newmtl RedTrs
+Kd 0.8000 0.0000 0.0000
+d 0.300
+
+newmtl GreenTrs
+Kd 0.0000 0.8000 0.0000
+d 0.300
+
+newmtl DefaultWhite_interior.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_interior.jpg
+
+newmtl DefaultWhite_pedals.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_pedals.jpg
+
+newmtl DefaultWhite_seats.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_seats.jpg
+
+newmtl DefaultWhite_throttle.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_throttle.jpg
+
+newmtl DefaultWhite_heat.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_heat.jpg
+
+newmtl DefaultWhite_fuelselector.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_fuelselector.jpg
+
+newmtl DefaultWhite_model.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_panel.jpg
+
+newmtl DefaultWhite_yoke.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_yoke.jpg
+
+newmtl DefaultWhite_left.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_left.jpg
+
+newmtl transparent
+Kd 0.8000 0.8000 0.8000
+d 0.250
+
+newmtl DefaultWhite_comp.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_compass.jpg
+
+newmtl DefaultWhite_audio.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_audio.jpg
+
+newmtl DefaultWhite_fuse.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_fuse.jpg
+
+newmtl DefaultWhite_amps.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_amps.jpg
+
+newmtl DefaultWhite_oilpress.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_oilpress.jpg
+
+newmtl DefaultWhite_inconu.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_adf.jpg
+
+newmtl DefaultWhite_oiltemp.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_oiltemp.jpg
+
+newmtl DefaultWhite_fuelpress.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_fuelpress.jpg
+
+newmtl DefaultWhite_fuel.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_fuel.jpg
+
+newmtl DefaultWhite_level.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_level.jpg
+
+newmtl DefaultWhite_plaques.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_plaques.jpg
+
+newmtl DefaultWhite_turn.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_turn.jpg
+
+newmtl DefaultWhite_suction.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_suction.jpg
+
+newmtl DefaultWhite_switch.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_switch.jpg
+
+newmtl DefaultWhite_chrono.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_chrono.jpg
+
+newmtl DefaultWhite_hdg.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_hdg.jpg
+
+newmtl DefaultWhite_mag_switch.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_mag_switch.jpg
+
+newmtl DefaultWhite_kx165.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_kx165.jpg
+
+newmtl DefaultWhite_rpm.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_rpm.jpg
+
+newmtl DefaultWhite_ki204.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_ki204.jpg
+
+newmtl DefaultWhite_vsi.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_vsi.jpg
+
+newmtl DefaultWhite_Altimeter.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_alt.jpg
+
+newmtl DefaultWhite_ASI.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_asi.jpg
+
+newmtl DefaultWhite_ai.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_ai.jpg
+
+newmtl DefaultWhite_KT76A.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_kt76a.jpg
+
+newmtl DefaultWhite_profil.png
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_panel.jpg

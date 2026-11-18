@@ -1,0 +1,25 @@
+# Russian pilot by Chernov-Egor (Sketchfab, CC-BY-4.0); posed (seated) by tools/prepare_assets.py
+
+newmtl Material.006
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.006_baseColor.jpg
+
+newmtl Material.001
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.001_baseColor.jpg
+
+newmtl Material.003
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.001_baseColor.jpg
+
+newmtl Material.007
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.006_baseColor.jpg
+
+newmtl Material.002
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.002_baseColor.jpg
+
+newmtl Material.004
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/pilot_Material.004_baseColor.jpg

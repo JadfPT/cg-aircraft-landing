@@ -1,0 +1,37 @@
+#version 330 core
+
+// Phong vertex shader. Takes each vertex to clip space with the MVP matrix and passes
+// its position and normal in world coordinates to the fragment shader, where the
+// lighting is computed for each pixel (Phong shading).
+
+// data of each vertex, read from the four buffers of the mesh
+layout(location = 0) in vec3 vertexPosition_modelspace;
+layout(location = 1) in vec3 vertexColor;
+layout(location = 2) in vec3 vertexNormal_modelspace;
+layout(location = 3) in vec2 vertexUV;
+
+// these are interpolated over the triangle for each fragment
+out vec3 fragmentColor;
+out vec2 UV;
+out vec3 Position_worldspace;
+out vec3 Normal_worldspace;
+
+// the same for the whole mesh
+uniform mat4 MVP;
+uniform mat4 M;
+uniform mat3 NormalMatrix;   // inverse transpose of M, so the normals stay perpendicular to the surface
+
+void main(){
+
+	// position of the vertex in clip space, MVP * position
+	gl_Position = MVP * vec4(vertexPosition_modelspace, 1);
+
+	// position and normal in world space, needed by the lighting
+	Position_worldspace = (M * vec4(vertexPosition_modelspace, 1)).xyz;
+	Normal_worldspace   = NormalMatrix * vertexNormal_modelspace;
+
+	// the colour and the texture coordinates of each vertex are
+	// interpolated to give the colour of each fragment
+	fragmentColor = vertexColor;
+	UV = vertexUV;
+}

@@ -1,0 +1,5 @@
+# Aircraft Hangar by toromanovic1989 (Sketchfab, CC-BY-NC-4.0)
+
+newmtl Material
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/hangar_Material_baseColor.jpg

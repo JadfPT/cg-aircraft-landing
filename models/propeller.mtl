@@ -1,0 +1,5 @@
+# PA-28 Cadet: helice, bol
+
+newmtl DefaultWhite
+Kd 0.8000 0.8000 0.8000
+map_Kd textures/pa28_texture.jpg

@@ -1,0 +1,16 @@
+# RUNWAY by pranav27 (Sketchfab, CC-BY-4.0)
+
+newmtl rw_Material
+Kd 0.1600 0.1600 0.1700
+
+newmtl rw_Material_001
+Kd 0.8000 0.8000 0.8000
+
+newmtl rw_Material_002
+Kd 0.3000 0.3000 0.3000
+
+newmtl rw_white_strip
+Kd 0.8000 0.8000 0.8000
+
+newmtl rw_material_0
+Kd 1.0000 1.0000 1.0000

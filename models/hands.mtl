@@ -1,0 +1,7 @@
+# First Person hands rigged by DavidFischer (Sketchfab, CC-BY-4.0); fingers closed (skinning) and placed on the yoke and throttle by tools/prepare_assets.py
+
+newmtl basicRigSkin.001
+Kd 0.5903 0.4400 0.3380
+
+newmtl basicRigSkin
+Kd 0.8689 0.8124 0.7881

@@ -1,0 +1,5 @@
+# A pilot in winter flight uniform by kerrylogun (Sketchfab, CC-BY-NC-4.0), decimated to 60000 triangles
+
+newmtl winter_pilot
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/winterpilot_Material.001_baseColor.jpg

@@ -1,0 +1,30 @@
+# aircraft carrier set (carrier crew) by waelXcm (Sketchfab, CC-BY-4.0)
+
+newmtl soldier_red
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/crew_soldier_red_baseColor.jpg
+
+newmtl Material.024
+Kd 0.7159 0.3924 0.3134
+
+newmtl helmet_red
+Kd 0.8000 0.0183 0.0159
+
+newmtl helmet_white
+Kd 0.2461 0.2461 0.2461
+
+newmtl Material.007
+Kd 0.8000 0.8000 0.8000
+
+newmtl Material
+Kd 1.0000 1.0000 1.0000
+map_Kd textures/crew_Material_baseColor.jpg
+
+newmtl Material.009
+Kd 0.0000 0.0000 0.0000
+
+newmtl Material.004
+Kd 0.0000 0.0000 0.0000
+
+newmtl glass_visors
+Kd 0.0000 0.0000 0.0000
